@@ -1,17 +1,17 @@
 package innerTelegramBotter
 
 import (
-	"github.com/ancestortelegram/wjLibTBot"
+	"github.com/ancestortelegram/wjLibTBot/wjLibTBotDataStructDefine"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 type emptyTBotSpi struct {
 }
 
-func newEmptyTBotSpi() wjLibTBot.IWJTelegramBotSPI {
+func newEmptyTBotSpi() wjLibTBotDataStructDefine.IWJTelegramBotSPI {
 	return &emptyTBotSpi{}
 }
-func (pInst *emptyTBotSpi) LoadingMeInfo(*wjLibTBot.SWJTBUser) {
+func (pInst *emptyTBotSpi) LoadingMeInfo(*wjLibTBotDataStructDefine.SWJTBUser) {
 }
 func (pInst *emptyTBotSpi) OnError(string, error) {
 }

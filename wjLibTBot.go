@@ -1,7 +1,9 @@
 package wjLibTBot
+
+import "github.com/ancestortelegram/wjLibTBot/wjLibTBotDataStructDefine"
 import innerTelegramBotter "github.com/ancestortelegram/wjLibTBot/internal"
 //import innerTelegramBotter "github.com/ancestortelegram/wjLibTBot/internal"
 
-func WJLTB_NewBotter(id int) (IWJTelegramBotAPI, error) {
-	return innerTelegramBotter.newTelegramBotApi(id)
+func WJLTB_NewBotter(id int) (wjLibTBotDataStructDefine.IWJTelegramBotAPI, error) {
+	return innerTelegramBotter.NewTelegramBotApi(id)
 }
