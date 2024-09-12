@@ -15,7 +15,7 @@ type cTBotApi struct {
 	tgUpdateConfig tgbotapi.UpdateConfig
 }
 
-func newTelegramBotApi(id int) (*cTBotApi, error) {
+func NewTelegramBotApi(id int) (*cTBotApi, error) {
 	bot := &cTBotApi{systemid: id, spi: newEmptyTBotSpi()}
 	return bot, nil
 }
