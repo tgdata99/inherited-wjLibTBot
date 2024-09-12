@@ -1,14 +1,14 @@
 package innerTelegramBotter
 
 import (
-	"github.com/ancestortelegram/wjLibTBot"
+	"github.com/ancestortelegram/wjLibTBot/wjLibTBotDataStructDefine"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 type cTBotApi struct {
 	systemid       int
-	spi            wjLibTBot.IWJTelegramBotSPI
-	infoMe         wjLibTBot.SWJTBUser
+	spi            wjLibTBotDataStructDefine.IWJTelegramBotSPI
+	infoMe         wjLibTBotDataStructDefine.SWJTBUser
 	tgBot          *tgbotapi.BotAPI
 	botToken       string
 	isRunning      bool
@@ -20,7 +20,7 @@ func NewTelegramBotApi(id int) (*cTBotApi, error) {
 	return bot, nil
 }
 
-func (pInst *cTBotApi) Initialize(botToken string, spi wjLibTBot.IWJTelegramBotSPI) error {
+func (pInst *cTBotApi) Initialize(botToken string, spi wjLibTBotDataStructDefine.IWJTelegramBotSPI) error {
 	pInst.botToken = botToken
 	pInst.spi = spi
 	err := pInst.createBot()
@@ -42,12 +42,12 @@ func (pInst *cTBotApi) Initialize(botToken string, spi wjLibTBot.IWJTelegramBotS
 func (pInst *cTBotApi) Stop() {
 	pInst.isRunning = false
 }
-func (pInst *cTBotApi) GetInfoMe() wjLibTBot.SWJTBUser {
+func (pInst *cTBotApi) GetInfoMe() wjLibTBotDataStructDefine.SWJTBUser {
 	return pInst.infoMe
 }
-func (pInst *cTBotApi) GetChatInfoByID(chatid int64) (wjLibTBot.SWJTBUser, error) {
+func (pInst *cTBotApi) GetChatInfoByID(chatid int64) (wjLibTBotDataStructDefine.SWJTBUser, error) {
 	info, err := pInst.tgBot.GetChat(tgbotapi.ChatInfoConfig{ChatConfig: tgbotapi.ChatConfig{ChatID: chatid}})
-	var userinfo1 wjLibTBot.SWJTBUser
+	var userinfo1 wjLibTBotDataStructDefine.SWJTBUser
 	if err != nil {
 		return userinfo1, err
 	}
