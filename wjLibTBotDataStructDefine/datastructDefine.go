@@ -28,6 +28,8 @@ type IWJTelegramBotAPI interface {
 	SendImageUrlListToID(int64, string, []string) ([]tgbotapi.Message, error)
 	GetDirectUrlByFileID(fileid string) (string, error)
 	SendChattable(msg tgbotapi.Chattable) (tgbotapi.Message, error)
+	GroupDeleteMessage(int64, int) error
+	GroupBanMember(int64, int64) error
 }
 
 // struct wise jumper telegram botter user;

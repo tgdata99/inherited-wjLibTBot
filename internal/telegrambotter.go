@@ -1,6 +1,8 @@
 package innerTelegramBotter
 
 import (
+	"fmt"
+
 	"github.com/ancestortelegram/wjLibTBot/wjLibTBotDataStructDefine"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
@@ -69,3 +71,56 @@ func (pInst *cTBotApi) GetDirectUrlByFileID(fileid string) (string, error) {
 func (pInst *cTBotApi) SendChattable(msg tgbotapi.Chattable) (tgbotapi.Message, error) {
 	return pInst.tgBot.Send(msg)
 }
+func (pInst *cTBotApi) GroupDeleteMessage(chatid int64, messageid int) error {
+	if resp, err := pInst.tgBot.Request(tgbotapi.NewDeleteMessage(chatid, messageid)); nil != err || !resp.Ok {
+		return fmt.Errorf("failed to delete message id %d (%s): %v", messageid, string(resp.Result), err)
+	}
+	return nil
+}
+
+/*
+	msgToDelete := tgbotapi.DeleteMessageConfig{
+		ChatID:    chatID,
+		MessageID: msgID,
+	}
+
+_, err := TelegramBot.Request(msgToDelete)
+*/
+func (pInst *cTBotApi) GroupBanMember(chatid, memberid int64) error {
+
+	banChatMemberConfig := tgbotapi.BanChatMemberConfig{
+		ChatMemberConfig: tgbotapi.ChatMemberConfig{
+			ChatID: chatid,
+			UserID: memberid,
+		},
+		RevokeMessages: true,
+	}
+
+	if resp, err := pInst.tgBot.Request(banChatMemberConfig); nil != err || !resp.Ok {
+		return fmt.Errorf("failed to ban member id %d (%s): %v", memberid, string(resp.Result), err)
+	}
+	return nil
+}
+
+/*
+func (l *TelegramListener) banUser(duration time.Duration, chatID int64, userID int64) error {
+	_, err := l.TbAPI.Send(tbapi.RestrictChatMemberConfig{
+		ChatMemberConfig: tbapi.ChatMemberConfig{
+			ChatID: chatID,
+			UserID: userID,
+		},
+		UntilDate: time.Now().Add(duration).Unix(),
+		Permissions: &tbapi.ChatPermissions{
+			CanSendMessages:       false,
+			CanSendMediaMessages:  false,
+			CanSendOtherMessages:  false,
+			CanAddWebPagePreviews: false,
+		},
+	})
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+*/
