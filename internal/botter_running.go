@@ -1,7 +1,6 @@
 package innerTelegramBotter
 
 import (
-	"fmt"
 	"time"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -49,7 +48,6 @@ func (pInst *cTBotApi) processUpdate_running(update1 tgbotapi.Update) {
 	if update1.Message == nil { // don't do this now;
 		return
 	}
-	fmt.Println("media groupid: ", update1.Message.MediaGroupID)
 
 	isGroup := update1.Message.Chat.Type == "group" || update1.Message.Chat.Type == "supergroup"
 	if isGroup {
@@ -95,4 +93,5 @@ func (pInst *cTBotApi) processMessageUser_running(tMsg *tgbotapi.Message) {
 func (pInst *cTBotApi) processMessageUserCommand_running(tMsg *tgbotapi.Message) {
 
 	pInst.spi.MessageUserCommand(tMsg.Chat.ID, tMsg.Command(), tMsg.Text)
+
 }
