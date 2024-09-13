@@ -6,15 +6,15 @@ type IWJTelegramBotSPI interface {
 	LoadingMeInfo(*SWJTBUser)
 	OnError(string, error)
 	OnWarning(string)
-	BotUpdateFirst(tgbotapi.Update) bool      // don't process this message anymore if return true
-	MessageUserCommand(int64, string, string) // userid, command, message;
-	MessageUserPhoto(int64, []tgbotapi.PhotoSize)
-	MessageUserAudio(int64, *tgbotapi.Audio)
-	MessageUserVideo(int64, *tgbotapi.Video)
-	MessageUserText(int64, string)
-	MessageGroupText(int64, int64, string) // groupid, senduserid, text;
-	EventGroupNewJoin(int64, int64)        // groupid ,userid;
-	EventGroupLeaveMemb(int64, int64)      // groupid, userid;
+	BotUpdateFirst(tgbotapi.Update) bool                         // don't process this message anymore if return true
+	MessageUserCommand(*tgbotapi.Message, int64, string, string) // userid, command, message;
+	MessageUserPhoto(*tgbotapi.Message, int64, []tgbotapi.PhotoSize)
+	MessageUserAudio(*tgbotapi.Message, int64, *tgbotapi.Audio)
+	MessageUserVideo(*tgbotapi.Message, int64, *tgbotapi.Video)
+	MessageUserText(*tgbotapi.Message, int64, string)
+	MessageGroupText(*tgbotapi.Message, int64, int64, string) // groupid, senduserid, text;
+	EventGroupNewJoin(*tgbotapi.Message, int64, int64)        // groupid ,userid;
+	EventGroupLeaveMemb(*tgbotapi.Message, int64, int64)      // groupid, userid;
 }
 
 // interface wises jumper telegram botter;
