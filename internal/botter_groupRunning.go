@@ -15,7 +15,7 @@ func (pInst *cTBotApi) processMessageGroup_running(tMsg *tgbotapi.Message) {
 		//pInst.spi.MessageUserVideo(tMsg.Chat.ID, tMsg.Video)
 	}
 	if tMsg.Text != "" {
-		pInst.spi.MessageGroupText(tMsg.Chat.ID, tMsg.From.ID, tMsg.Text)
+		pInst.spi.MessageGroupText(tMsg, tMsg.Chat.ID, tMsg.From.ID, tMsg.Text)
 	} else {
 		a := tMsg.NewChatMembers
 		if len(a) > 0 {
@@ -33,5 +33,5 @@ func (pInst *cTBotApi) processMessageGroup_running(tMsg *tgbotapi.Message) {
 }
 func (pInst *cTBotApi) processMessageGroupCommand_running(tMsg *tgbotapi.Message) {
 
-	pInst.spi.MessageUserCommand(tMsg.Chat.ID, tMsg.Command(), tMsg.Text)
+	pInst.spi.MessageUserCommand(tMsg, tMsg.Chat.ID, tMsg.Command(), tMsg.Text)
 }

@@ -20,19 +20,19 @@ func (pInst *emptyTBotSpi) OnWarning(string) {
 func (pInst *emptyTBotSpi) BotUpdateFirst(tgbotapi.Update) bool {
 	return false
 }
-func (pInst *emptyTBotSpi) MessageUserCommand(int64, string, string) {
+func (pInst *emptyTBotSpi) MessageUserCommand(*tgbotapi.Message, int64, string, string) {
 }
-func (pInst *emptyTBotSpi) MessageUserPhoto(int64, []tgbotapi.PhotoSize) {
+func (pInst *emptyTBotSpi) MessageUserPhoto(*tgbotapi.Message, int64, []tgbotapi.PhotoSize) {
 }
-func (pInst *emptyTBotSpi) MessageUserAudio(int64, *tgbotapi.Audio) {
+func (pInst *emptyTBotSpi) MessageUserAudio(*tgbotapi.Message, int64, *tgbotapi.Audio) {
 }
-func (pInst *emptyTBotSpi) MessageUserVideo(int64, *tgbotapi.Video) {
+func (pInst *emptyTBotSpi) MessageUserVideo(*tgbotapi.Message, int64, *tgbotapi.Video) {
 }
-func (pInst *emptyTBotSpi) MessageUserText(int64, string) {
+func (pInst *emptyTBotSpi) MessageUserText(*tgbotapi.Message, int64, string) {
 }
-func (pInst *emptyTBotSpi) MessageGroupText(int64, int64, string) {
+func (pInst *emptyTBotSpi) MessageGroupText(*tgbotapi.Message, int64, int64, string) {
 }
-func (pInst *emptyTBotSpi) EventGroupNewJoin(int64, int64) {
+func (pInst *emptyTBotSpi) EventGroupNewJoin(*tgbotapi.Message, int64, int64) {
 }
-func (pInst *emptyTBotSpi) EventGroupLeaveMemb(int64, int64) {
+func (pInst *emptyTBotSpi) EventGroupLeaveMemb(*tgbotapi.Message, int64, int64) {
 }
