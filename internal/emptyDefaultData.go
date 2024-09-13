@@ -36,3 +36,5 @@ func (pInst *emptyTBotSpi) EventGroupNewJoin(*tgbotapi.Message, int64, int64) {
 }
 func (pInst *emptyTBotSpi) EventGroupLeaveMemb(*tgbotapi.Message, int64, int64) {
 }
+func (pInst *emptyTBotSpi) MessageGroupCommand(*tgbotapi.Message, int64, string, string) {
+}
