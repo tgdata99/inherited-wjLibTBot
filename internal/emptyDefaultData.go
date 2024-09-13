@@ -30,3 +30,9 @@ func (pInst *emptyTBotSpi) MessageUserVideo(int64, *tgbotapi.Video) {
 }
 func (pInst *emptyTBotSpi) MessageUserText(int64, string) {
 }
+func (pInst *emptyTBotSpi) MessageGroupText(int64, int64, string) {
+}
+func (pInst *emptyTBotSpi) EventGroupNewJoin(int64, int64) {
+}
+func (pInst *emptyTBotSpi) EventGroupLeaveMemb(int64, int64) {
+}

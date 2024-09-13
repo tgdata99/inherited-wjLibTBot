@@ -53,12 +53,23 @@ func (pInst *cTBotApi) processUpdate_running(update1 tgbotapi.Update) {
 
 	isGroup := update1.Message.Chat.Type == "group" || update1.Message.Chat.Type == "supergroup"
 	if isGroup {
+		a := update1.Message.NewChatMembers
+		if len(a) > 0 {
+			for _, member := range a {
+				pInst.spi.EventGroupNewJoin(update1.Message.Chat.ID, member.ID)
+				//fmt.Print(iIndex, member)
+			}
+		}
+
+		b := update1.Message.LeftChatMember
+		if b != nil {
+			pInst.spi.EventGroupLeaveMemb(update1.Message.Chat.ID, b.ID)
+		}
 		if update1.Message.IsCommand() {
 			pInst.processMessageGroupCommand_running(update1.Message)
 		} else {
 			pInst.processMessageGroup_running(update1.Message)
 		}
-		pInst.processMessageGroup_running(update1.Message)
 	} else {
 		if update1.Message.IsCommand() {
 			pInst.processMessageUserCommand_running(update1.Message)
@@ -68,14 +79,7 @@ func (pInst *cTBotApi) processUpdate_running(update1 tgbotapi.Update) {
 	}
 
 }
-func (pInst *cTBotApi) processMessageGroup_running(tMsg *tgbotapi.Message) {
-	// nothing now
-}
-func (pInst *cTBotApi) processMessageGroupCommand_running(tMsg *tgbotapi.Message) {
-	// nothing now
-}
 func (pInst *cTBotApi) processMessageUser_running(tMsg *tgbotapi.Message) {
-	fmt.Println("caption: "+tMsg.Caption+" text: ", tMsg.Text)
 	if tMsg.Photo != nil {
 		pInst.spi.MessageUserPhoto(tMsg.Chat.ID, tMsg.Photo)
 	} else if tMsg.Audio != nil {
