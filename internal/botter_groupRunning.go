@@ -32,5 +32,5 @@ func (pInst *cTBotApi) processMessageGroup_running(tMsg *tgbotapi.Message) {
 	}
 }
 func (pInst *cTBotApi) processMessageGroupCommand_running(tMsg *tgbotapi.Message) {
-	pInst.spi.MessageUserCommand(tMsg, tMsg.Chat.ID, tMsg.Command(), tMsg.Text)
+	pInst.spi.MessageGroupCommand(tMsg, tMsg.Chat.ID, tMsg.Command(), tMsg.Text)
 }
