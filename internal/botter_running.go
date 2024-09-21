@@ -43,12 +43,16 @@ func (pInst *cTBotApi) updateMessage_running() {
 func (pInst *cTBotApi) processUpdate_running(update1 tgbotapi.Update) {
 
 	if pInst.spi.BotUpdateFirst(update1) { // return true, means stop deal with this message;
+		fmt.Println("libot: update firest return")
 		return
 	}
 
 	if update1.Message == nil { // don't do this now;
+		fmt.Println("libot: no message return")
 		return
 	}
+
+	fmt.Println("libot: update1.Message.Chat.Type", update1.Message.Chat.Type)
 
 	isGroup := update1.Message.Chat.Type == "group" || update1.Message.Chat.Type == "supergroup"
 	if isGroup {
