@@ -7,6 +7,7 @@ import (
 )
 
 func (pInst *cTBotApi) processMessageGroup_running(tMsg *tgbotapi.Message) {
+	fmt.Println("libot: group message")
 	if tMsg.Photo != nil {
 		pInst.spi.MessageGroupPhoto(tMsg, tMsg.Chat.ID, tMsg.From.ID, tMsg.Photo)
 	} else if tMsg.Audio != nil {
@@ -32,5 +33,6 @@ func (pInst *cTBotApi) processMessageGroup_running(tMsg *tgbotapi.Message) {
 	}
 }
 func (pInst *cTBotApi) processMessageGroupCommand_running(tMsg *tgbotapi.Message) {
-	pInst.spi.MessageGroupCommand(tMsg, tMsg.Chat.ID, tMsg.Command(), tMsg.Text)
+	fmt.Println("libot: group command")
+	pInst.spi.MessageGroupCommand(tMsg, tMsg.Chat.ID, tMsg.From.ID, tMsg.Command(), tMsg.Text)
 }
