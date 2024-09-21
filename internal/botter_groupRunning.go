@@ -8,7 +8,7 @@ import (
 
 func (pInst *cTBotApi) processMessageGroup_running(tMsg *tgbotapi.Message) {
 	if tMsg.Photo != nil {
-		//pInst.spi.MessageUserPhoto(tMsg.Chat.ID, tMsg.Photo)
+		pInst.spi.MessageGroupPhoto(tMsg, tMsg.Chat.ID, tMsg.From.ID, tMsg.Photo)
 	} else if tMsg.Audio != nil {
 		//pInst.spi.MessageUserAudio(tMsg.Chat.ID, tMsg.Audio)
 	} else if tMsg.Video != nil {
