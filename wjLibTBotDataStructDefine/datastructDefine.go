@@ -12,11 +12,12 @@ type IWJTelegramBotSPI interface {
 	MessageUserAudio(*tgbotapi.Message, int64, *tgbotapi.Audio)
 	MessageUserVideo(*tgbotapi.Message, int64, *tgbotapi.Video)
 	MessageUserText(*tgbotapi.Message, int64, string)
-	MessageGroupPhoto(*tgbotapi.Message, int64, int64, []tgbotapi.PhotoSize) // groupid, senduserid, photolist;
 	MessageGroupText(*tgbotapi.Message, int64, int64, string)                // groupid, senduserid, text;
-	MessageGroupCommand(*tgbotapi.Message, int64, int64, string, string)     // groupid, userid, command, message;
-	EventGroupNewJoin(*tgbotapi.Message, int64, int64)                       // groupid ,userid;
-	EventGroupLeaveMemb(*tgbotapi.Message, int64, int64)                     // groupid, userid;
+	MessageGroupPhoto(*tgbotapi.Message, int64, int64, []tgbotapi.PhotoSize) // groupid, senduserid, photolist;
+	MessageGroupVideo(*tgbotapi.Message, int64, int64, *tgbotapi.Video)
+	MessageGroupCommand(*tgbotapi.Message, int64, int64, string, string) // groupid, userid, command, message;
+	EventGroupNewJoin(*tgbotapi.Message, int64, int64)                   // groupid ,userid;
+	EventGroupLeaveMember(*tgbotapi.Message, int64, int64)               // groupid, userid;
 }
 
 // interface wises jumper telegram botter;

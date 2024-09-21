@@ -34,9 +34,11 @@ func (pInst *emptyTBotSpi) MessageGroupText(*tgbotapi.Message, int64, int64, str
 }
 func (pInst *emptyTBotSpi) MessageGroupPhoto(*tgbotapi.Message, int64, int64, []tgbotapi.PhotoSize) {
 }
+func (pInst *emptyTBotSpi) MessageGroupVideo(*tgbotapi.Message, int64, int64, *tgbotapi.Video) {
+}
 func (pInst *emptyTBotSpi) EventGroupNewJoin(*tgbotapi.Message, int64, int64) {
 }
-func (pInst *emptyTBotSpi) EventGroupLeaveMemb(*tgbotapi.Message, int64, int64) {
+func (pInst *emptyTBotSpi) EventGroupLeaveMember(*tgbotapi.Message, int64, int64) {
 }
 func (pInst *emptyTBotSpi) MessageGroupCommand(*tgbotapi.Message, int64, int64, string, string) {
 }

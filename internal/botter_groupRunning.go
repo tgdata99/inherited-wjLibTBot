@@ -1,38 +1,33 @@
 package innerTelegramBotter
 
 import (
-	"fmt"
-
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 func (pInst *cTBotApi) processMessageGroup_running(tMsg *tgbotapi.Message) {
-	fmt.Println("libot: group message")
 	if tMsg.Photo != nil {
 		pInst.spi.MessageGroupPhoto(tMsg, tMsg.Chat.ID, tMsg.From.ID, tMsg.Photo)
 	} else if tMsg.Audio != nil {
 		//pInst.spi.MessageUserAudio(tMsg.Chat.ID, tMsg.Audio)
 	} else if tMsg.Video != nil {
-		//pInst.spi.MessageUserVideo(tMsg.Chat.ID, tMsg.Video)
+		pInst.spi.MessageGroupVideo(tMsg, tMsg.Chat.ID, tMsg.From.ID, tMsg.Video)
 	}
 	if tMsg.Text != "" {
 		pInst.spi.MessageGroupText(tMsg, tMsg.Chat.ID, tMsg.From.ID, tMsg.Text)
 	} else {
 		a := tMsg.NewChatMembers
 		if len(a) > 0 {
-			fmt.Println("have new members ")
-			for iIndex, member := range a {
-				fmt.Print(iIndex, member)
+			for _, member := range a {
+				pInst.spi.EventGroupNewJoin(tMsg, tMsg.Chat.ID, member.ID)
 			}
 		}
 
 		b := tMsg.LeftChatMember
 		if b != nil {
-			fmt.Println("member left: ", b)
+			pInst.spi.EventGroupLeaveMember(tMsg, tMsg.Chat.ID, b.ID)
 		}
 	}
 }
 func (pInst *cTBotApi) processMessageGroupCommand_running(tMsg *tgbotapi.Message) {
-	fmt.Println("libot: group command")
 	pInst.spi.MessageGroupCommand(tMsg, tMsg.Chat.ID, tMsg.From.ID, tMsg.Command(), tMsg.Text)
 }

@@ -1,7 +1,6 @@
 package innerTelegramBotter
 
 import (
-	"fmt"
 	"time"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -43,39 +42,33 @@ func (pInst *cTBotApi) updateMessage_running() {
 func (pInst *cTBotApi) processUpdate_running(update1 tgbotapi.Update) {
 
 	if pInst.spi.BotUpdateFirst(update1) { // return true, means stop deal with this message;
-		fmt.Println("libot: update firest return")
 		return
 	}
 
 	if update1.Message == nil { // don't do this now;
-		fmt.Println("libot: no message return")
 		return
 	}
 
-	fmt.Println("libot: update1.Message.Chat.Type", update1.Message.Chat.Type)
-
 	isGroup := update1.Message.Chat.Type == "group" || update1.Message.Chat.Type == "supergroup"
 	if isGroup {
-		fmt.Println("libot: 1. group message")
-		a := update1.Message.NewChatMembers
-		if len(a) > 0 {
-			for _, member := range a {
-				pInst.spi.EventGroupNewJoin(update1.Message, update1.Message.Chat.ID, member.ID)
-				//fmt.Print(iIndex, member)
-			}
-		}
+		// a := update1.Message.NewChatMembers
+		// if len(a) > 0 {
+		// 	for _, member := range a {
+		// 		pInst.spi.EventGroupNewJoin(update1.Message, update1.Message.Chat.ID, member.ID)
+		// 		//fmt.Print(iIndex, member)
+		// 	}
+		// }
 
-		b := update1.Message.LeftChatMember
-		if b != nil {
-			pInst.spi.EventGroupLeaveMemb(update1.Message, update1.Message.Chat.ID, b.ID)
-		}
+		// b := update1.Message.LeftChatMember
+		// if b != nil {
+		// 	pInst.spi.EventGroupLeaveMemb(update1.Message, update1.Message.Chat.ID, b.ID)
+		// }
 		if update1.Message.IsCommand() {
 			pInst.processMessageGroupCommand_running(update1.Message)
 		} else {
 			pInst.processMessageGroup_running(update1.Message)
 		}
 	} else {
-		fmt.Println("libot: 1. user message")
 		if update1.Message.IsCommand() {
 			pInst.processMessageUserCommand_running(update1.Message)
 		} else {
