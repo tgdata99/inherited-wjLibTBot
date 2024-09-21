@@ -14,7 +14,7 @@ type IWJTelegramBotSPI interface {
 	MessageUserText(*tgbotapi.Message, int64, string)
 	MessageGroupPhoto(*tgbotapi.Message, int64, int64, []tgbotapi.PhotoSize) // groupid, senduserid, photolist;
 	MessageGroupText(*tgbotapi.Message, int64, int64, string)                // groupid, senduserid, text;
-	MessageGroupCommand(*tgbotapi.Message, int64, string, string)            // userid, command, message;
+	MessageGroupCommand(*tgbotapi.Message, int64, int64, string, string)     // groupid, userid, command, message;
 	EventGroupNewJoin(*tgbotapi.Message, int64, int64)                       // groupid ,userid;
 	EventGroupLeaveMemb(*tgbotapi.Message, int64, int64)                     // groupid, userid;
 }

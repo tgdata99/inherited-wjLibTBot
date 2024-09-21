@@ -1,6 +1,7 @@
 package innerTelegramBotter
 
 import (
+	"fmt"
 	"time"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -51,6 +52,7 @@ func (pInst *cTBotApi) processUpdate_running(update1 tgbotapi.Update) {
 
 	isGroup := update1.Message.Chat.Type == "group" || update1.Message.Chat.Type == "supergroup"
 	if isGroup {
+		fmt.Println("libot: 1. group message")
 		a := update1.Message.NewChatMembers
 		if len(a) > 0 {
 			for _, member := range a {
@@ -69,6 +71,7 @@ func (pInst *cTBotApi) processUpdate_running(update1 tgbotapi.Update) {
 			pInst.processMessageGroup_running(update1.Message)
 		}
 	} else {
+		fmt.Println("libot: 1. user message")
 		if update1.Message.IsCommand() {
 			pInst.processMessageUserCommand_running(update1.Message)
 		} else {
